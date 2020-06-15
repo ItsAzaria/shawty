@@ -11,6 +11,9 @@
 <body>
     <div class="container">
         <h1>Shawty</h1>
+        <form action="/logout?_method=DELETE" method="POST">
+            <button type="submit">Log Out</button>
+        </form>
         <form action="/" method="post" class="my-4 form-inline">
             <label for="fullUrl" class="sr-only">Url</label>
             <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl" class="form-control mr-2 col"/>

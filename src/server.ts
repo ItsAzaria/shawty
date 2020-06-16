@@ -1,21 +1,27 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const ShortUrl = require("./models/url");
-const User = require("./models/user");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const flash = require("express-flash");
-const session = require("express-session");
-const initializePassport = require("./passport.config");
-const methodOverride = require('method-override');
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import flash from "express-flash";
+import session from "express-session";
+import methodOverride from "method-override";
+import requestCountry from "request-country";
+import path from "path";
+
+import ShortUrl from "./models/url";
+import User from "./models/user";
+
+import initializePassport from "./passport.config";
+
+dotenv.config();
 
 initializePassport(
   passport,
-  async (email) => {
+  async (email: any) => {
     return await User.findOne({ email });
   },
-  async (id) => {
+  async (id: any) => {
     return await User.findOne({ id });
   }
 );
@@ -28,7 +34,9 @@ mongoose.connect("mongodb://localhost/shawty", {
 });
 
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, '/views'))
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(__dirname + '/public'));
 app.use(flash());
 app.use(
   session({
@@ -94,16 +102,16 @@ app.delete('/logout', (req, res) => {
 
 app.get("/:shortUrl", async (req, res) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
-  
+
     if (!shortUrl) return res.sendStatus(404);
-  
+
     shortUrl.clicks++;
     shortUrl.save();
-  
+
     res.redirect(shortUrl.full);
   });
 
-function checkAuthenticated(req, res, next) {
+function checkAuthenticated(req: any, res: any, next: any) {
   if (req.isAuthenticated()) {
     return next();
   }
@@ -111,7 +119,7 @@ function checkAuthenticated(req, res, next) {
   res.redirect("/login");
 }
 
-function checkNotAuthenticated(req, res, next) {
+function checkNotAuthenticated(req: any, res: any, next: any) {
   if (req.isAuthenticated()) {
     return res.redirect("/");
   }

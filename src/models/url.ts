@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const shortID = require('shortid');
+import mongoose from "mongoose";
+import shortID from "shortid";
 
 const urlSchema = new mongoose.Schema({
     full: {

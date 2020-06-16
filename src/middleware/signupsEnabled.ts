@@ -4,4 +4,4 @@ export const signupsEnabled = (req: any, res: any, next: any) => {
   }
 
   res.redirect("/login");
-}
+};

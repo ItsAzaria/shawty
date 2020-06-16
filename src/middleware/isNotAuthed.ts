@@ -4,4 +4,4 @@ export const isNotAuthed = (req: any, res: any, next: any) => {
   }
 
   next();
-}
+};

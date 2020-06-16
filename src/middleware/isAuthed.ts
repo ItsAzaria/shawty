@@ -4,4 +4,4 @@ export const isAuthed = (req: any, res: any, next: any) => {
   }
 
   res.redirect("/login");
-}
+};

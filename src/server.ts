@@ -17,7 +17,7 @@ import { getLogin, postLogin } from "./controllers/login";
 import { deleteLogout } from "./controllers/logout";
 import { getShortLink } from "./controllers/short.link";
 import { isNotAuthed } from "./middleware/isNotAuthed";
-import { isAuthed } from "./middleware/isAuthed"
+import { isAuthed } from "./middleware/isAuthed";
 import { signupsEnabled } from "./middleware/signupsEnabled";
 
 dotenv.config();
@@ -40,12 +40,13 @@ mongoose.connect("mongodb://localhost/shawty", {
 });
 
 app.set("view engine", "ejs");
-app.set('views', path.join(__dirname, '/views'));
+app.set("views", path.join(__dirname, "/views"));
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 app.use(flash());
-app.use(session({
+app.use(
+  session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -53,7 +54,7 @@ app.use(session({
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 
 /*
 
@@ -70,10 +71,8 @@ app.post("/register", [isNotAuthed, signupsEnabled], postRegister);
 app.get("/login", isNotAuthed, getLogin);
 app.post("/login", isNotAuthed, postLogin);
 
-app.delete('/logout', deleteLogout);
+app.delete("/logout", deleteLogout);
 
 app.get("/:shortUrl", getShortLink);
-
-
 
 app.listen(process.env.PORT || 5000);

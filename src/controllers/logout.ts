@@ -1,0 +1,4 @@
+export async function deleteLogout (req: any, res: any) {
+    req.logOut();
+    res.redirect('/login');
+};

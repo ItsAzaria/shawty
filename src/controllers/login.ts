@@ -1,13 +1,13 @@
 import passport from "passport";
 
-export async function getLogin(req: any, res: any) {
-  res.render("login");
+export const getLogin = (req: any, res: any) => {
+    res.render("login");
 }
 
-export async function postLogin(req: any, res: any) {
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-  });
+export const postLogin = (req: any, res: any, next: any) => {
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/login",
+        failureFlash: true,
+    })(req, res, next);
 }

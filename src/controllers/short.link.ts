@@ -1,6 +1,6 @@
 import ShortUrl from "../models/url";
 
-export async function getShortLink (req: any, res: any) {
+export const getShortLink = async (req: any, res: any) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
 
     if (!shortUrl) return res.sendStatus(404);
@@ -10,7 +10,3 @@ export async function getShortLink (req: any, res: any) {
 
     res.redirect(shortUrl.full);
 };
-
-
-
-

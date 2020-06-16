@@ -1,4 +1,4 @@
-export async function isAuthed(req: any, res: any, next: any) {
+export const isAuthed = (req: any, res: any, next: any) => {
   if (req.isAuthenticated()) {
     return next();
   }

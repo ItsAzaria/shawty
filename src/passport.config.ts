@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 // passport.Strategy;
 // LocalStrategy.Strategy;
 
-function initialize(passport: any, getUserByEmail: any, getUserById: any) {
+export default function initialize(passport: any, getUserByEmail: any, getUserById: any) {
     const authenticateUser = async (email: any, password: any, done: any) => {
         const user = await getUserByEmail(email);
 
@@ -32,4 +32,4 @@ function initialize(passport: any, getUserByEmail: any, getUserById: any) {
     });
 }
 
-module.exports = initialize;
+// module.exports = initialize;

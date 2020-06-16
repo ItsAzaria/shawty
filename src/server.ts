@@ -56,7 +56,7 @@ app.get("/", checkAuthenticated, async (req, res) => {
 
 app.post("/", checkAuthenticated, async (req, res) => {
   await ShortUrl.create({
-    full: req.body.fullUrl,
+    full: req.body.fullUrl
   });
 
   res.redirect("/");

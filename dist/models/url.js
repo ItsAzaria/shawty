@@ -21,5 +21,5 @@ const urlSchema = new mongoose_1.default.Schema({
         default: 0
     }
 });
-module.exports = mongoose_1.default.model('ShortUrl', urlSchema);
+exports.default = mongoose_1.default.model('ShortUrl', urlSchema);
 //# sourceMappingURL=url.js.map

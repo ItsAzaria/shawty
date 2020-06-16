@@ -1,5 +1,11 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import shortID from "shortid";
+
+export interface IUrlSchema extends Document {
+    full: string;
+    short?: string;
+    clicks?: number;
+}
 
 const urlSchema = new mongoose.Schema({
     full: {
@@ -18,4 +24,4 @@ const urlSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('ShortUrl', urlSchema);
+export default mongoose.model<IUrlSchema>('ShortUrl', urlSchema);

@@ -54,7 +54,7 @@ app.get("/", checkAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0,
 }));
 app.post("/", checkAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield url_1.default.create({
-        full: req.body.fullUrl,
+        full: req.body.fullUrl
     });
     res.redirect("/");
 }));

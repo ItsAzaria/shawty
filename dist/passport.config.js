@@ -40,5 +40,6 @@ function initialize(passport, getUserByEmail, getUserById) {
         return done(null, getUserById(id));
     });
 }
-module.exports = initialize;
+exports.default = initialize;
+// module.exports = initialize;
 //# sourceMappingURL=passport.config.js.map

@@ -18,5 +18,5 @@ const userSchema = new mongoose_1.default.Schema({
         required: true
     }
 });
-module.exports = mongoose_1.default.model('User', userSchema);
+exports.default = mongoose_1.default.model('User', userSchema);
 //# sourceMappingURL=user.js.map

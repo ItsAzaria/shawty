@@ -1,0 +1,14 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.px-15 {
+    padding: 0 15px;
+}

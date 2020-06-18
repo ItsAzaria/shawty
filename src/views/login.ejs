@@ -14,7 +14,7 @@
         <% if (messages.error) { %>
             <%= messages.error %>
         <% } %>
-        <form action="/login" method="POST">
+        <form action="/login" method="POST" class="form-signin">
             <div>
                 <label for="email" class="sr-only">Email Address</label>
                 <input type="email" id="email" name="email" class="form-control" placeholder="Email Address" autofocus required>

@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/index.css">
 
-    <title>Document</title>
+    <title>Shawty</title>
 </head>
 <body>
     <div class="container">
-        <h1>Shawty</h1>
-        <form action="/logout?_method=DELETE" method="POST">
-            <button type="submit">Log Out</button>
-        </form>
+        <div class="row justify-content-between px-15">
+            <h1 class="col-xs-6">Shawty</h1>
+            <form class="col-xs-6" action="/logout?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-danger">Log Out</button>
+            </form>
+        </div>
+        
         <form action="/" method="post" class="my-4 form-inline">
             <label for="fullUrl" class="sr-only">Url</label>
             <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl" class="form-control mr-2 col"/>

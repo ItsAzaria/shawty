@@ -1,0 +1,1 @@
+{"version":3,"file":"signupsEnabled.js","sourceRoot":"","sources":["../../src/middleware/signupsEnabled.ts"],"names":[],"mappings":";;;AAAa,QAAA,cAAc,GAAG,CAAC,GAAQ,EAAE,GAAQ,EAAE,IAAS,EAAE,EAAE;IAC9D,IAAI,OAAO,CAAC,GAAG,CAAC,OAAO,KAAK,GAAG,EAAE;QAC/B,OAAO,IAAI,EAAE,CAAC;KACf;IAED,GAAG,CAAC,QAAQ,CAAC,QAAQ,CAAC,CAAC;AACzB,CAAC,CAAC"}

@@ -8,18 +8,18 @@ const shortid_1 = __importDefault(require("shortid"));
 const urlSchema = new mongoose_1.default.Schema({
     full: {
         type: String,
-        required: true
+        required: true,
     },
     short: {
         type: String,
         required: true,
-        default: shortid_1.default.generate
+        default: shortid_1.default.generate,
     },
     clicks: {
         type: Number,
         required: true,
-        default: 0
-    }
+        default: 0,
+    },
 });
-exports.default = mongoose_1.default.model('ShortUrl', urlSchema);
+exports.default = mongoose_1.default.model("ShortUrl", urlSchema);
 //# sourceMappingURL=url.js.map

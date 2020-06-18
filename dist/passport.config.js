@@ -20,21 +20,21 @@ function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = (email, password, done) => __awaiter(this, void 0, void 0, function* () {
         const user = yield getUserByEmail(email);
         if (!user) {
-            return done(null, false, { message: 'Invalid credentials' });
+            return done(null, false, { message: "Invalid credentials" });
         }
         try {
             if (yield bcrypt_1.default.compare(password, user.password)) {
                 return done(null, user);
             }
             else {
-                return done(null, false, { message: 'Invalid credentials' });
+                return done(null, false, { message: "Invalid credentials" });
             }
         }
         catch (e) {
             return done(e);
         }
     });
-    passport.use(new passport_local_1.default.Strategy({ usernameField: 'email' }, authenticateUser));
+    passport.use(new passport_local_1.default.Strategy({ usernameField: "email" }, authenticateUser));
     passport.serializeUser((user, done) => done(null, user.id));
     passport.deserializeUser((id, done) => {
         return done(null, getUserById(id));

@@ -15,15 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const user_1 = __importDefault(require("./models/user"));
 const passport_1 = __importDefault(require("passport"));
 const express_flash_1 = __importDefault(require("express-flash"));
 const express_session_1 = __importDefault(require("express-session"));
 const method_override_1 = __importDefault(require("method-override"));
 const path_1 = __importDefault(require("path"));
-const url_1 = __importDefault(require("./models/url"));
-const user_1 = __importDefault(require("./models/user"));
 const passport_config_1 = __importDefault(require("./passport.config"));
+const index_1 = require("./controllers/index");
+const register_1 = require("./controllers/register");
+const login_1 = require("./controllers/login");
+const logout_1 = require("./controllers/logout");
+const short_link_1 = require("./controllers/short.link");
+const isNotAuthed_1 = require("./middleware/isNotAuthed");
+const isAuthed_1 = require("./middleware/isAuthed");
+const signupsEnabled_1 = require("./middleware/signupsEnabled");
 dotenv_1.default.config();
 passport_config_1.default(passport_1.default, (email) => __awaiter(void 0, void 0, void 0, function* () {
     return yield user_1.default.findOne({ email });
@@ -36,9 +42,9 @@ mongoose_1.default.connect("mongodb://localhost/shawty", {
     useUnifiedTopology: true,
 });
 app.set("view engine", "ejs");
-app.set('views', path_1.default.join(__dirname, '/views'));
+app.set("views", path_1.default.join(__dirname, "/views"));
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use(express_1.default.static(__dirname + '/public'));
+app.use(express_1.default.static(__dirname + "/public"));
 app.use(express_flash_1.default());
 app.use(express_session_1.default({
     secret: process.env.SESSION_SECRET,
@@ -47,65 +53,19 @@ app.use(express_session_1.default({
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
-app.use(method_override_1.default('_method'));
-app.get("/", checkAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const shortUrls = yield url_1.default.find();
-    res.render("index", { shortUrls, user: req.user });
-}));
-app.post("/", checkAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    yield url_1.default.create({
-        full: req.body.fullUrl
-    });
-    res.redirect("/");
-}));
-app.get("/register", checkNotAuthenticated, (req, res) => {
-    res.render("register");
-});
-app.post("/register", checkNotAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const hashedPassword = yield bcrypt_1.default.hash(req.body.password, 10);
-        yield user_1.default.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword,
-        });
-        res.redirect("/login");
-    }
-    catch (_a) {
-        res.redirect("/register");
-    }
-}));
-app.get("/login", checkNotAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.render("login");
-}));
-app.post("/login", checkNotAuthenticated, passport_1.default.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-}));
-app.delete('/logout', (req, res) => {
-    req.logOut();
-    res.redirect('/login');
-});
-app.get("/:shortUrl", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const shortUrl = yield url_1.default.findOne({ short: req.params.shortUrl });
-    if (!shortUrl)
-        return res.sendStatus(404);
-    shortUrl.clicks++;
-    shortUrl.save();
-    res.redirect(shortUrl.full);
-}));
-function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
-function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return res.redirect("/");
-    }
-    next();
-}
+app.use(method_override_1.default("_method"));
+/*
+
+  ROUTES
+
+*/
+app.get("/", isAuthed_1.isAuthed, index_1.getIndex);
+app.post("/", isAuthed_1.isAuthed, index_1.postIndex);
+app.get("/register", [isNotAuthed_1.isNotAuthed, signupsEnabled_1.signupsEnabled], register_1.getRegister);
+app.post("/register", [isNotAuthed_1.isNotAuthed, signupsEnabled_1.signupsEnabled], register_1.postRegister);
+app.get("/login", isNotAuthed_1.isNotAuthed, login_1.getLogin);
+app.post("/login", isNotAuthed_1.isNotAuthed, login_1.postLogin);
+app.delete("/logout", logout_1.deleteLogout);
+app.get("/:shortUrl", short_link_1.getShortLink);
 app.listen(process.env.PORT || 5000);
 //# sourceMappingURL=server.js.map

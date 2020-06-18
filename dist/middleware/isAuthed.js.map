@@ -1,0 +1,1 @@
+{"version":3,"file":"isAuthed.js","sourceRoot":"","sources":["../../src/middleware/isAuthed.ts"],"names":[],"mappings":";;;AAAa,QAAA,QAAQ,GAAG,CAAC,GAAQ,EAAE,GAAQ,EAAE,IAAS,EAAE,EAAE;IACxD,IAAI,GAAG,CAAC,eAAe,EAAE,EAAE;QACzB,OAAO,IAAI,EAAE,CAAC;KACf;IAED,GAAG,CAAC,QAAQ,CAAC,QAAQ,CAAC,CAAC;AACzB,CAAC,CAAC"}

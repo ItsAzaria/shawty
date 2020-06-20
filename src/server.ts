@@ -11,7 +11,7 @@ import requestCountry from "request-country";
 import path from "path";
 import initializePassport from "./passport.config";
 
-import { getIndex, postIndex } from "./controllers/index";
+import { getIndex } from "./controllers/index";
 import { getRegister, postRegister } from "./controllers/register";
 import { getLogin, postLogin } from "./controllers/login";
 import { deleteLogout } from "./controllers/logout";
@@ -19,6 +19,7 @@ import { getShortLink } from "./controllers/short.link";
 import { isNotAuthed } from "./middleware/isNotAuthed";
 import { isAuthed } from "./middleware/isAuthed";
 import { signupsEnabled } from "./middleware/signupsEnabled";
+import { createLink, deleteLink } from "./controllers/link";
 
 dotenv.config();
 
@@ -56,6 +57,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
+mongoose.set("useCreateIndex", true);
+
 /*
 
   ROUTES
@@ -63,7 +66,9 @@ app.use(methodOverride("_method"));
 */
 
 app.get("/", isAuthed, getIndex);
-app.post("/", isAuthed, postIndex);
+
+app.post("/create-link", isAuthed, createLink);
+app.get('/delete-link', isAuthed, deleteLink);
 
 app.get("/register", [isNotAuthed, signupsEnabled], getRegister);
 app.post("/register", [isNotAuthed, signupsEnabled], postRegister);

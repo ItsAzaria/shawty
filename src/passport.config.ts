@@ -1,9 +1,6 @@
 import passportLocal from "passport-local";
 import bcrypt from "bcrypt";
 
-// passport.Strategy;
-// LocalStrategy.Strategy;
-
 export default function initialize(
   passport: any,
   getUserByEmail: any,
@@ -37,5 +34,3 @@ export default function initialize(
     return done(null, getUserById(id));
   });
 }
-
-// module.exports = initialize;

@@ -18,7 +18,7 @@
             </form>
         </div>
         
-        <form action="/" method="post" class="my-4 form-inline">
+        <form action="/create-link" method="post" class="my-4 form-inline">
             <label for="fullUrl" class="sr-only">Url</label>
             <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl" class="form-control mr-2 col"/>
             <button type="submit" class="btn btn-success">Shrink</button>
@@ -31,6 +31,7 @@
                         <th>Full Url</th>
                         <th>Short Url</th>
                         <th>Clicks</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,7 @@
                             <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
                             <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
                             <td><%= shortUrl.clicks %></td>
+                            <td><a href="/delete-link?id=<%= shortUrl._id %>">X</a></td>
                         </tr>
                     <% }) %>
                 </tbody>

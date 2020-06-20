@@ -22,6 +22,10 @@ const urlSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 export default mongoose.model<IUrlSchema>("ShortUrl", urlSchema);

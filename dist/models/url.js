@@ -20,6 +20,10 @@ const urlSchema = new mongoose_1.default.Schema({
         required: true,
         default: 0,
     },
+    user: {
+        type: mongoose_1.default.Types.ObjectId,
+        ref: "User",
+    },
 });
 exports.default = mongoose_1.default.model("ShortUrl", urlSchema);
 //# sourceMappingURL=url.js.map

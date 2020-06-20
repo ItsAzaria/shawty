@@ -19,16 +19,18 @@ exports.getRegister = (req, res) => {
     res.render("register");
 };
 exports.postRegister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const hashedPassword = yield bcrypt_1.default.hash(req.body.password, 10);
-        yield user_1.default.create({
-            email: req.body.email,
-            password: hashedPassword,
-        });
+    const hashedPassword = yield bcrypt_1.default.hash(req.body.password, 10);
+    yield user_1.default.create({
+        email: req.body.email,
+        password: hashedPassword,
+    })
+        .then(() => {
+        req.flash("success", "Registered account, you may now log in.");
         res.redirect("/login");
-    }
-    catch (_a) {
+    })
+        .catch((err) => {
+        req.flash("error", err.message);
         res.redirect("/register");
-    }
+    });
 });
 //# sourceMappingURL=register.js.map

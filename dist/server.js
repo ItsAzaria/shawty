@@ -54,6 +54,7 @@ app.use(express_session_1.default({
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 app.use(method_override_1.default("_method"));
+mongoose_1.default.set("useCreateIndex", true);
 /*
 
   ROUTES

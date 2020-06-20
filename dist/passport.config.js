@@ -14,8 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const passport_local_1 = __importDefault(require("passport-local"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
-// passport.Strategy;
-// LocalStrategy.Strategy;
 function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = (email, password, done) => __awaiter(this, void 0, void 0, function* () {
         const user = yield getUserByEmail(email);
@@ -41,5 +39,4 @@ function initialize(passport, getUserByEmail, getUserById) {
     });
 }
 exports.default = initialize;
-// module.exports = initialize;
 //# sourceMappingURL=passport.config.js.map

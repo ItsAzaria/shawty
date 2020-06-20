@@ -15,13 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postIndex = exports.getIndex = void 0;
 const url_1 = __importDefault(require("../models/url"));
 exports.getIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const shortUrls = yield url_1.default.find();
+    const shortUrls = yield url_1.default.find()
+        .where("user")
+        .equals(req.session.passport.user);
     res.render("index", { shortUrls, user: req.user });
 });
 exports.postIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    yield url_1.default.create({
-        full: req.body.fullUrl,
-    });
+    const doc = { full: req.body.fullUrl, user: req.session.passport.user };
+    yield url_1.default.create(doc);
     res.redirect("/");
 });
 //# sourceMappingURL=index.js.map
